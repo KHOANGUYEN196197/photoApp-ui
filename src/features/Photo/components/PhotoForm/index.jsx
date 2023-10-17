@@ -1,12 +1,12 @@
 import PropTypes from "prop-types";
 import React from "react";
-import { Button, FormGroup } from "reactstrap";
-
 import InputField from "../../../../custom-fields/inputField";
 import SelectField from "../../../../custom-fields/selectField";
 import RandomPhotoField from "../../../../custom-fields/ramdomPhotoField";
 import { FastField, Form, Formik } from "formik";
 import { PHOTO_CATEGORY_OPTIONS } from "../../../../constants/global";
+import * as Yup from "yup";
+import ButtonCustom from "../../../../components/buttonCustom";
 
 PhotoForm.propTypes = {
   onSubmit: PropTypes.func,
@@ -20,11 +20,20 @@ function PhotoForm(props) {
   // npm i --save react-select
   const dataInit = {
     title: "",
-    categoryId: "",
+    categoryId: null,
     photo: "",
   };
+  const validationSchema = Yup.object({
+    title: Yup.string().required("this field is required"),
+    categoryId: Yup.number().required("this field is required"),
+    photo: Yup.string().required("this field is required"),
+  });
   return (
-    <Formik initialValues={dataInit} onSubmit={props.onSubmit}>
+    <Formik
+      initialValues={dataInit}
+      onSubmit={props.onSubmit}
+      validationSchema={validationSchema}
+    >
       {(formikProps) => {
         const { isSubmitting } = formikProps;
         return (
@@ -51,10 +60,7 @@ function PhotoForm(props) {
               //
               label="Photo"
             />
-
-            <FormGroup>
-              <Button color="primary">Add to album</Button>
-            </FormGroup>
+            <ButtonCustom isSubmitting={isSubmitting} />
           </Form>
         );
       }}

@@ -3,6 +3,7 @@ import Images from "../../constants/images";
 
 function RandomPhoto(props) {
   const { name, label, value, onChange, onBlur } = props;
+  console.log(6666, name);
   const randomIdPhoto = () => {
     const randomID = Math.trunc(Math.random() * 2000);
     return `https://picsum.photos/id/${randomID}/200/200`;
@@ -11,9 +12,7 @@ function RandomPhoto(props) {
   const randomPhoto = () => {
     if (onChange) {
       const randomUrl = randomIdPhoto();
-      console.log(1111, randomUrl);
       onChange(randomUrl);
-      console.log(1122222, value);
     }
   };
   return (
@@ -22,6 +21,7 @@ function RandomPhoto(props) {
 
       <div>
         <Button
+          name={name}
           onClick={randomPhoto}
           onBlur={onBlur}
           type="button"
