@@ -1,10 +1,14 @@
+import { ErrorMessage } from "formik";
 import Select from "react-select";
-import { FormGroup, Label } from "reactstrap";
+import { FormFeedback, FormGroup, Label } from "reactstrap";
+import "./style.scss";
 
 function SelectField(props) {
   const { field, form, label, placeholder, options } = props;
   const { name, value, onChange, onBlur } = field;
   const selectOption = options.find((option) => option.value === value);
+  const { errors, touched } = form;
+  const showErr = errors[name] && touched[name];
 
   const handleSelectOption = (option) => {
     const selectedValue = option ? option.value : option;
@@ -17,7 +21,7 @@ function SelectField(props) {
     onChange(changeEvent);
   };
   return (
-    <FormGroup>
+    <FormGroup className="select-custom">
       <Label for={name}>{label}</Label>
       <Select
         id={name}
@@ -27,7 +31,9 @@ function SelectField(props) {
         onBlur={onBlur}
         placeholder={placeholder}
         options={options}
+        className={showErr ? "is-invalid" : ""}
       />
+      <ErrorMessage name={name} component={FormFeedback} />
     </FormGroup>
   );
 }
