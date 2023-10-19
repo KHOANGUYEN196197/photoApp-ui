@@ -4,12 +4,13 @@ import Images from "../../../../constants/images";
 import { Link } from "react-router-dom";
 import { Container } from "reactstrap";
 import PhotoList from "../../components/photoList";
-import photos from "../../../../constants/photoList";
 import PaginationCustom from "../../../../components/pagination";
+import { useSelector } from "react-redux";
 
 MainPage.propTypes = {};
 
 function MainPage(props) {
+  const photos = useSelector((state) => state.photos);
   const handleEdit = () => {
     console.log("edit");
   };
