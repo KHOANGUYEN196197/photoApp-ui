@@ -3,7 +3,7 @@ import photoReducer from '../features/Photo/photoSlice'
 
 
 const rootReducer = combineReducers({
-    photos: photoReducer,
+    photoReducer,
 })
 
 const store = configureStore({
