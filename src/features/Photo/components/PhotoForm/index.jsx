@@ -17,12 +17,8 @@ PhotoForm.defaultProps = {
 };
 
 function PhotoForm(props) {
+  const { isAddMode, initialValue } = props;
   // npm i --save react-select
-  const dataInit = {
-    title: "",
-    categoryId: null,
-    photo: "",
-  };
   const validationSchema = Yup.object({
     title: Yup.string().required("this field is required"),
     categoryId: Yup.number().required("this field is required"),
@@ -30,7 +26,7 @@ function PhotoForm(props) {
   });
   return (
     <Formik
-      initialValues={dataInit}
+      initialValues={initialValue}
       onSubmit={props.onSubmit}
       validationSchema={validationSchema}
     >
@@ -60,7 +56,7 @@ function PhotoForm(props) {
               //
               label="Photo"
             />
-            <ButtonCustom isSubmitting={isSubmitting} />
+            <ButtonCustom isAddMode={isAddMode} isSubmitting={isSubmitting} />
           </Form>
         );
       }}

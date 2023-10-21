@@ -12,10 +12,13 @@ const photoSlice = createSlice({
             state.push(action.payload)
         },
         updatePhoto(state, action) {
-            //logic
+            const newPhoto = action.payload;
+            const index = state.findIndex((photo) => +photo.id === +newPhoto.id);
+            state[index] = newPhoto;
         },
         deletePhoto(state, action) {
-            //logic
+            const photoId = action.payload
+            return (state = state.filter((photo) => photo.id !== photoId));
         }
 
     },
