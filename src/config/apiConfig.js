@@ -1,0 +1,1 @@
+export const photoApi = 'https://6525403767cfb1e59ce6f510.mockapi.io/photo-list/'

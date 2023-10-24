@@ -5,6 +5,7 @@ import Banner from "../../../../components/banner";
 import { addPhoto, updatePhoto } from "../../photoSlice";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
+import { postPhoto } from "../../photoThunk";
 
 AddEditPage.propTypes = {};
 
@@ -14,7 +15,7 @@ function AddEditPage(props) {
   // const params = useParams();
   // console.log(123, params.photoId);
   const { photoId } = useParams();
-  const photos = useSelector((state) => state.photoReducer);
+  const photos = useSelector((state) => state.photoReducer.photos);
   const photoEdit = photos.find((photo) => +photo.id === +photoId);
   const isAddMode = !photoId;
 
@@ -30,7 +31,7 @@ function AddEditPage(props) {
     if (isAddMode) {
       const randomId = Math.trunc(Math.random() * 9000);
       formPhoto.id = randomId;
-      const action = addPhoto(formPhoto);
+      const action = postPhoto(formPhoto);
       dispatch(action);
       navigate("/");
     } else {
