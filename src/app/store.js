@@ -1,5 +1,6 @@
 import { combineReducers, configureStore } from "@reduxjs/toolkit";
-import photoReducer from '../features/Photo/photoSlice'
+import photoReducer from '../features/Photo/photoSlice';
+import ThunkMiddleware from "redux-thunk";
 
 
 const rootReducer = combineReducers({
@@ -8,5 +9,6 @@ const rootReducer = combineReducers({
 
 const store = configureStore({
     reducer: rootReducer,
+    middleware: [ThunkMiddleware]
 })
 export default store
